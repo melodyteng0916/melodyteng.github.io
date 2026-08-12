@@ -123,6 +123,80 @@
             color: #777;
             margin: 0;
         }
+        .post {
+            padding: 32px 0;
+            border-bottom: 1px solid #161616;
+        }
+        .post-photo {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #111;
+            margin-bottom: 18px;
+        }
+        .post-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+        .post-link {
+            font-size: 13px;
+            font-weight: 400;
+            color: #888;
+            text-decoration: none;
+            white-space: nowrap;
+            margin-left: 4px;
+            border-bottom: 1px solid #333;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .post-link:hover { color: #fff; border-color: #fff; }
+        .post-meta {
+            font-size: 13px;
+            color: #777;
+            margin: 0 0 12px;
+        }
+        .post-body {
+            font-size: 15px;
+            color: #bbb;
+            margin: 0;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .tag {
+            font-size: 12px;
+            color: #999;
+            border: 1px solid #2a2a2a;
+            border-radius: 999px;
+            padding: 4px 11px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #111;
+            display: block;
+            transition: opacity 0.2s;
+        }
+        .gallery img:hover { opacity: 0.75; }
         .right {
             flex-shrink: 0;
             text-align: right;
@@ -143,6 +217,7 @@
             h1 { font-size: 2.1rem; }
             .entry { gap: 14px; }
             .location, .dates { font-size: 12px; }
+            .gallery { grid-template-columns: repeat(3, 1fr); gap: 6px; }
         }
     </style>
 </head>
@@ -224,6 +299,90 @@
             <div class="right">
                 <p class="location">San Francisco, CA</p>
                 <p class="dates">Feb 2026 – Present</p>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-photo">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-01.jpg" alt="SaaStr Week Founder Mixer" loading="lazy" decoding="async">
+            </div>
+            <p class="post-title">SaaStr Week Founder Mixer 🍕🍺Step Out. StepFun In. <a class="post-link" href="https://luma.com/4cqlswgf?tk=7cM7TP" target="_blank" rel="noopener">↗ luma.com/4cqlswgf</a></p>
+            <p class="post-meta">May 2026 · Downtown San Mateo, CA · Seamate × StepFun</p>
+            <p class="post-body">An informal evening mixer built around SaaStr Week, trading panels and slide decks for pizza, drinks, and actual conversation. The night opened with a short intro from StepFun, moved into a 25-minute open mic where anyone could stand up and share what they were building and who they wanted to meet, then dissolved into free-form networking. 249 people registered, making it a mid-size gathering that still felt personal — big enough for serendipity, small enough that no one got lost in the room. The crowd was AI-native product builders, SaaS founders adding AI to their stack, operators scaling those products, and investors tracking the application layer. The goal was simple: give founders in town for SaaStr a low-pressure room where introductions happen on their own.</p>
+            <div class="tags">
+                <span class="tag">249 registered</span>
+                <span class="tag">Founder mixer</span>
+                <span class="tag">Open mic</span>
+            </div>
+            <div class="gallery">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-02.jpg" alt="SaaStr Week Founder Mixer photo 2" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-03.jpg" alt="SaaStr Week Founder Mixer photo 3" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-04.jpg" alt="SaaStr Week Founder Mixer photo 4" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-05.jpg" alt="SaaStr Week Founder Mixer photo 5" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-06.jpg" alt="SaaStr Week Founder Mixer photo 6" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-07.jpg" alt="SaaStr Week Founder Mixer photo 7" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-08.jpg" alt="SaaStr Week Founder Mixer photo 8" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-09.jpg" alt="SaaStr Week Founder Mixer photo 9" loading="lazy" decoding="async">
+                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-10.jpg" alt="SaaStr Week Founder Mixer photo 10" loading="lazy" decoding="async">
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-photo">
+                <img src="images/events/google-io-week-panel/google-io-week-panel-01.jpg" alt="AI Native Developers Meetup at Google I/O Week" loading="lazy" decoding="async">
+            </div>
+            <p class="post-title">AI Native Developers Meetup @ Google I/O Week <a class="post-link" href="https://luma.com/ai-native-developers-io-week" target="_blank" rel="noopener">↗ luma.com/ai-native-developers-io-week</a></p>
+            <p class="post-meta">May 2026 · Plug and Play Tech Center, Sunnyvale, CA · Seamate × Linkloud</p>
+            <p class="post-body">The largest event of the series — a panel night for founders, developers, and builders working on AI-native products, agents, and multimodal tools, timed to Google I/O week. 918 people registered and roughly 500 attended, with speakers from Google, StepFun, Genspark, Comfy, and a range of AI-native startups covering agents, AI-assisted development, multimodal creation, AI video, monetization, and production infrastructure. The audience skewed toward developers already in town for I/O, alongside AI-native founders, app and agent builders, AIGC creators, and investors watching the space. Part of Seamate's &ldquo;Front Row Series,&rdquo; the event was designed as a high-signal gathering during a week when the entire ecosystem is in one place.</p>
+            <div class="tags">
+                <span class="tag">918 registered · ~500 attended</span>
+                <span class="tag">Panel</span>
+                <span class="tag">Front Row Series</span>
+            </div>
+            <div class="gallery">
+                <img src="images/events/google-io-week-panel/google-io-week-panel-02.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 2" loading="lazy" decoding="async">
+                <img src="images/events/google-io-week-panel/google-io-week-panel-03.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 3" loading="lazy" decoding="async">
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-photo">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-01.jpg" alt="Sake Night with Kylon" loading="lazy" decoding="async">
+            </div>
+            <p class="post-title">Sake Night with Kylon <a class="post-link" href="https://luma.com/74s6v040?tk=oDZX4U" target="_blank" rel="noopener">↗ luma.com/74s6v040</a></p>
+            <p class="post-meta">May 2026 · Private residence, San Francisco, CA · Kylon</p>
+            <p class="post-body">A two-night pre-launch celebration for Kylon, an AI platform that brings agents directly into workplace messaging. Each night walked guests through a tasting of four to five premium sakes across different styles, punctuated by surprise interactive moments and time with the Kylon team. Deliberately intimate — around 28 guests per night in a private San Francisco apartment, capped so that everyone in the room could actually meet everyone else. The invite list was curated rather than open: founders, operators, and early users who would care about what Kylon was building. Less a launch party than a way to put the product in front of a small, high-context room before it went public.</p>
+            <div class="tags">
+                <span class="tag">~28 guests per night</span>
+                <span class="tag">Two nights</span>
+                <span class="tag">Invite-only</span>
+            </div>
+            <div class="gallery">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-02.jpg" alt="Sake Night with Kylon photo 2" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-03.jpg" alt="Sake Night with Kylon photo 3" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-04.jpg" alt="Sake Night with Kylon photo 4" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-05.jpg" alt="Sake Night with Kylon photo 5" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-06.jpg" alt="Sake Night with Kylon photo 6" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-07.jpg" alt="Sake Night with Kylon photo 7" loading="lazy" decoding="async">
+                <img src="images/events/kylon-sake-night/kylon-sake-night-08.jpg" alt="Sake Night with Kylon photo 8" loading="lazy" decoding="async">
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-photo">
+                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-01.jpg" alt="Tea Tasting Founder Meetup" loading="lazy" decoding="async">
+            </div>
+            <p class="post-title">Tea Tasting Founder Meetup</p>
+            <p class="post-meta">San Francisco, CA · Private</p>
+            <p class="post-body">The quietest event of the series, and the one that needed the least explanation. A small group of founders around a single table, working through a slow sequence of teas — no name tags, no pitch round, no open mic. The format borrowed its pacing from the tea itself: steep, taste, talk, repeat. Conversations ran long and went somewhere real, mostly toward the parts of building a company that don't make it into a demo day slide. Invitation only and intentionally tiny, kept to the size where a single conversation can hold the whole room. No landing page, no ticket link — just a room, a kettle, and people who needed a few hours off the record.</p>
+            <div class="tags">
+                <span class="tag">Private</span>
+                <span class="tag">Invite-only</span>
+                <span class="tag">Founder meetup</span>
+            </div>
+            <div class="gallery">
+                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-02.jpg" alt="Tea Tasting Founder Meetup photo 2" loading="lazy" decoding="async">
+                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-03.jpg" alt="Tea Tasting Founder Meetup photo 3" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
