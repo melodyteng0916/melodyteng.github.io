@@ -45,33 +45,39 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid #333;
+            background: #fff;
+            border: 1px solid #fff;
             border-radius: 999px;
             padding: 9px 18px;
-            color: #fff;
+            color: #000;
+            font-weight: 600;
             text-decoration: none;
             font-size: 14px;
-            transition: background 0.2s, border-color 0.2s;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
         }
         .resume-btn:hover {
-            background: #fff;
+            background: #ccc;
+            border-color: #ccc;
             color: #000;
-            border-color: #fff;
         }
         h2 {
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #666;
-            margin: 72px 0 8px;
+            margin: 40px 0 4px;
             font-weight: 600;
         }
+        /* Only the first section needs to clear the page title. */
+        h2:first-of-type { margin-top: 64px; }
         .entry {
+            padding: 24px 0;
+            border-bottom: 1px solid #161616;
+        }
+        .entry-head {
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 24px 0;
-            border-bottom: 1px solid #161616;
         }
         .logo {
             width: 52px;
@@ -123,6 +129,89 @@
             color: #777;
             margin: 0;
         }
+
+        /* --- Collapsible experience entries --- */
+        details.entry > summary {
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+        }
+        details.entry > summary::-webkit-details-marker { display: none; }
+        details.entry > summary .role {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.2s;
+        }
+        .chev {
+            display: inline-block;
+            font-size: 10px;
+            color: #666;
+            transition: transform 0.2s, color 0.2s;
+        }
+        details.entry > summary:hover .chev,
+        details.entry[open] > summary .chev { color: #fff; }
+        details.entry[open] > summary .chev { transform: rotate(180deg); }
+        details.entry > summary:focus-visible .role { color: #fff; }
+        .bullets {
+            margin: 16px 0 2px;
+            padding: 16px 0 0 72px;
+            border-top: 1px solid #161616;
+            list-style: none;
+        }
+        .bullets li {
+            position: relative;
+            font-size: 14.5px;
+            color: #bbb;
+            margin-bottom: 10px;
+            padding-left: 16px;
+        }
+        .bullets li:last-child { margin-bottom: 0; }
+        .bullets li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #555;
+        }
+
+        /* --- Education --- */
+        .edu-logos {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .edu-logos img {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 5px;
+        }
+        .edu-logos img.dark { background: #000; border: 1px solid #222; padding: 0; }
+        .degree-note {
+            font-size: 14px;
+            font-weight: 400;
+            color: #888;
+        }
+        .programs {
+            font-size: 15px;
+            color: #ddd;
+            margin: 4px 0 0;
+        }
+        .programs strong { font-weight: 600; color: #fff; }
+        .programs .sep { color: #555; margin: 0 4px; }
+        .honors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
         .post {
             padding: 32px 0;
             border-bottom: 1px solid #161616;
@@ -181,6 +270,30 @@
             border-radius: 999px;
             padding: 4px 11px;
         }
+        .sessions {
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+            border-top: 1px solid #161616;
+        }
+        .sessions li {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 14px;
+            font-size: 14px;
+            padding: 9px 0;
+            border-bottom: 1px solid #161616;
+        }
+        .sessions .venue { color: #ddd; min-width: 0; }
+        .sessions .count { color: #777; font-size: 13px; white-space: nowrap; }
+        .sessions a {
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .sessions a:hover { color: #fff; border-color: #fff; }
         .gallery {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -196,6 +309,7 @@
             display: block;
             transition: opacity 0.2s;
         }
+        .zoomable { cursor: zoom-in; }
         .gallery img:hover { opacity: 0.75; }
         .right {
             flex-shrink: 0;
@@ -212,12 +326,59 @@
             white-space: nowrap;
             margin: 0;
         }
+
+        /* --- Lightbox --- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.94);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 64px;
+            cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .lb-btn {
+            position: absolute;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 30px;
+            line-height: 1;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+        .lb-btn:hover { color: #fff; }
+        .lb-close { top: 10px; right: 14px; font-size: 26px; }
+        .lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+        .lb-count {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: #777;
+        }
         @media (max-width: 560px) {
             body { padding: 56px 20px 90px; }
             h1 { font-size: 2.1rem; }
-            .entry { gap: 14px; }
+            .entry-head { gap: 14px; }
             .location, .dates { font-size: 12px; }
             .gallery { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .bullets { padding-left: 0; }
+            .edu-logos img { width: 44px; height: 44px; }
+            .lightbox { padding: 56px 12px 44px; }
         }
     </style>
 </head>
@@ -230,161 +391,337 @@
             <a class="resume-btn" href="work/Resume_Melody.pdf" download>↓ Download Resume</a>
         </div>
 
+        <h2>Education</h2>
+
+        <div class="entry">
+            <div class="entry-head">
+                <div class="edu-logos">
+                    <img src="images/education/uoft.jpg" alt="University of Toronto">
+                    <img class="dark" src="images/education/rotman-commerce.jpg" alt="Rotman Commerce">
+                </div>
+                <div class="entry-body">
+                    <p class="role">University of Toronto <span class="degree-note">· Bachelor's Degree</span></p>
+                    <p class="programs"><strong>Statistics Major</strong> <span class="sep">·</span> <strong>Rotman Commerce Specialist</strong></p>
+                    <div class="honors">
+                        <span class="tag">GPA 3.7 / 4.0</span>
+                        <span class="tag">Dean's List Scholar</span>
+                        <span class="tag">Student Council Leadership Award Scholarship</span>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="location">Toronto, Canada</p>
+                    <p class="dates">Sep 2021 – Apr 2026</p>
+                </div>
+            </div>
+        </div>
+
         <h2>Experience</h2>
 
-        <div class="entry">
-            <img class="logo" src="work/company%20logo/kylon.jpg" alt="Kylon">
-            <div class="entry-body">
-                <p class="role">Product Manager Intern</p>
-                <p class="company"><a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
-            </div>
-            <div class="right">
-                <p class="location">San Francisco, CA</p>
-                <p class="dates">Apr 2026 – Present</p>
-            </div>
-        </div>
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/kylon.jpg" alt="Kylon">
+                    <div class="entry-body">
+                        <p class="role">Product Manager Intern <span class="chev">▼</span></p>
+                        <p class="company"><a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
+                    </div>
+                    <div class="right">
+                        <p class="location">San Francisco, CA</p>
+                        <p class="dates">Apr 2026 – Present</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Owned the integrations onboarding flow, lifting first-integration completion 30% through funnel drop-off analysis and redesign.</li>
+                <li>Conducted 25+ discovery interviews with early design partners, translating pain points into a prioritized product backlog.</li>
+                <li>Scored 1,000+ candidate connectors on user demand and build effort to define the GitHub, Notion, and Gmail launch tier.</li>
+                <li>Wrote 8+ PRDs in Notion for core features including scoped permissions and agent workflows, driving each through eng review.</li>
+                <li>Represented Kylon to founders and presented roadmap and metrics to internal stakeholders, driving alignment on priorities.</li>
+            </ul>
+        </details>
 
-        <div class="entry">
-            <img class="logo" src="work/company%20logo/rbc.jpg" alt="RBC">
-            <div class="entry-body">
-                <p class="role">Data Analyst Intern</p>
-                <p class="company">RBC Royal Bank of Canada</p>
-                <p class="meta">Corporate Client Group (CCG), Capital Markets</p>
-            </div>
-            <div class="right">
-                <p class="location">Toronto, Canada</p>
-                <p class="dates">Jan – Aug 2025</p>
-            </div>
-        </div>
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/rbc.jpg" alt="RBC">
+                    <div class="entry-body">
+                        <p class="role">Data Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">RBC Royal Bank of Canada</p>
+                        <p class="meta">Corporate Client Group (CCG), Capital Markets</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Toronto, Canada</p>
+                        <p class="dates">Jan – Aug 2025</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Queried and transformed large datasets from Snowflake using SQL to support monthly data quality reporting.</li>
+                <li>Automated and rebuilt the Financial Report using Python and Excel VBA, enhancing efficiency by 87.5% (4 hrs to 30 mins).</li>
+                <li>Developed executive-ready interactive Tableau dashboards to visualize inconsistencies in Financial M&amp;A and Loan deal records.</li>
+                <li>Designed the Daily Deposit Balance Report to monitor $37B+ in corporate deposits, incorporating inflow/outflow trend analysis, multi-year benchmarks, and run-off forecasts. Introduced a macro-driven workflow that eliminated all manual reporting steps.</li>
+                <li>Partnered with Finance and Credit teams to consolidate loan, deposit, and income data, presenting an insights story for executives.</li>
+            </ul>
+        </details>
 
-        <div class="entry">
-            <img class="logo" src="work/company%20logo/xiaohongshu.png" alt="Xiaohongshu">
-            <div class="entry-body">
-                <p class="role">Data Analyst Intern</p>
-                <p class="company">Xiaohongshu (RedNote)</p>
-                <p class="meta">High Risk Industry Sales Team</p>
-            </div>
-            <div class="right">
-                <p class="location">Shanghai, China</p>
-                <p class="dates">Jul – Sep 2024</p>
-            </div>
-        </div>
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/xiaohongshu.png" alt="Xiaohongshu">
+                    <div class="entry-body">
+                        <p class="role">Data Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">Xiaohongshu (RedNote)</p>
+                        <p class="meta">High Risk Industry Sales Team</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Shanghai, China</p>
+                        <p class="dates">Jul – Sep 2024</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Analyzed 200K+ rows of sales and advertising data with advanced SQL and automated VBA workflows, identifying high-ROI advertising trends, optimizing digital advertising strategies, and boosting ROI by 15%.</li>
+                <li>Built Power BI dashboards to visualize real-time regional performance and guide sales strategies across APAC.</li>
+                <li>Designed predictive models for seasonal demand trends using Python and regression analysis.</li>
+                <li>Drove compliance alignment for medical and finance verticals by developing data-based risk monitoring frameworks.</li>
+            </ul>
+        </details>
 
-        <div class="entry">
-            <img class="logo" src="work/company%20logo/microsoft.svg.webp" alt="Microsoft">
-            <div class="entry-body">
-                <p class="role">Business Analyst Intern</p>
-                <p class="company">Microsoft</p>
-                <p class="meta">Web Experiences Team (WebXT)</p>
-            </div>
-            <div class="right">
-                <p class="location">Beijing, China</p>
-                <p class="dates">May – Sep 2023</p>
-            </div>
-        </div>
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/microsoft.svg.webp" alt="Microsoft">
+                    <div class="entry-body">
+                        <p class="role">Business Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">Microsoft</p>
+                        <p class="meta">Web Experiences Team (WebXT)</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Beijing, China</p>
+                        <p class="dates">May – Sep 2023</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Collaborated with the Product Team on major products such as Microsoft Edge, supporting AI integration and feature optimization.</li>
+                <li>Supported Microsoft's AI product integration initiatives by evaluating 5 AI startups and industry trends, producing data-driven strategic reports influencing Microsoft's technology adoption roadmap.</li>
+                <li>Delivered daily AI newsletters, keeping executives informed on cutting-edge developments and market dynamics.</li>
+                <li>Partnered across product, engineering, and marketing teams to coordinate data-governed communication pipelines.</li>
+            </ul>
+        </details>
 
         <h2>Events</h2>
 
         <div class="entry">
-            <div class="entry-body">
-                <p class="role">Startup Event Host &amp; MC</p>
-                <p class="company">Seamate · Mito Health · Coral.io · Kylon</p>
-                <div class="logo-row">
-                    <img src="work/company%20logo/seamate.jpg" alt="Seamate">
-                    <img src="work/company%20logo/mitohealth.jpg" alt="Mito Health">
-                    <img src="work/company%20logo/coral.jpg" alt="Coral.io">
-                    <img src="work/company%20logo/kylon.jpg" alt="Kylon">
+            <div class="entry-head">
+                <div class="entry-body">
+                    <p class="role">Startup Event Host &amp; MC</p>
+                    <p class="company">Seamate · Mito Health · Coral · Kylon</p>
+                    <div class="logo-row">
+                        <img src="work/company%20logo/seamate.jpg" alt="Seamate">
+                        <img src="work/company%20logo/mitohealth.jpg" alt="Mito Health">
+                        <img src="work/company%20logo/coral.jpg" alt="Coral">
+                        <img src="work/company%20logo/kylon.jpg" alt="Kylon">
+                    </div>
                 </div>
-            </div>
-            <div class="right">
-                <p class="location">San Francisco, CA</p>
-                <p class="dates">Feb 2026 – Present</p>
+                <div class="right">
+                    <p class="location">San Francisco, CA</p>
+                    <p class="dates">Feb 2026 – Present</p>
+                </div>
             </div>
         </div>
 
         <div class="post">
             <div class="post-photo">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-01.jpg" alt="SaaStr Week Founder Mixer" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-01.jpg" alt="SaaStr Week Founder Mixer" loading="lazy" decoding="async">
             </div>
             <p class="post-title">SaaStr Week Founder Mixer 🍕🍺Step Out. StepFun In. <a class="post-link" href="https://luma.com/4cqlswgf?tk=7cM7TP" target="_blank" rel="noopener">↗ luma.com/4cqlswgf</a></p>
             <p class="post-meta">May 2026 · Downtown San Mateo, CA · Seamate × StepFun</p>
-            <p class="post-body">An informal evening mixer built around SaaStr Week, trading panels and slide decks for pizza, drinks, and actual conversation. The night opened with a short intro from StepFun, moved into a 25-minute open mic where anyone could stand up and share what they were building and who they wanted to meet, then dissolved into free-form networking. 249 people registered, making it a mid-size gathering that still felt personal — big enough for serendipity, small enough that no one got lost in the room. The crowd was AI-native product builders, SaaS founders adding AI to their stack, operators scaling those products, and investors tracking the application layer. The goal was simple: give founders in town for SaaStr a low-pressure room where introductions happen on their own.</p>
+            <p class="post-body">We hosted this founder mixer during SaaStr Week with StepFun — pizza, drinks, and none of the slide decks. StepFun opened with a short intro, then we ran a 25-minute open mic where anyone could stand up and say what they were building and who they wanted to meet. 249 people registered: AI-native founders, SaaS builders adding AI to their stack, and investors watching the application layer. Big enough for good introductions, small enough that nobody got lost.</p>
             <div class="tags">
                 <span class="tag">249 registered</span>
                 <span class="tag">Founder mixer</span>
                 <span class="tag">Open mic</span>
             </div>
             <div class="gallery">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-02.jpg" alt="SaaStr Week Founder Mixer photo 2" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-03.jpg" alt="SaaStr Week Founder Mixer photo 3" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-04.jpg" alt="SaaStr Week Founder Mixer photo 4" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-05.jpg" alt="SaaStr Week Founder Mixer photo 5" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-06.jpg" alt="SaaStr Week Founder Mixer photo 6" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-07.jpg" alt="SaaStr Week Founder Mixer photo 7" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-08.jpg" alt="SaaStr Week Founder Mixer photo 8" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-09.jpg" alt="SaaStr Week Founder Mixer photo 9" loading="lazy" decoding="async">
-                <img src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-10.jpg" alt="SaaStr Week Founder Mixer photo 10" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-02.jpg" alt="SaaStr Week Founder Mixer photo 2" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-03.jpg" alt="SaaStr Week Founder Mixer photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-04.jpg" alt="SaaStr Week Founder Mixer photo 4" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-05.jpg" alt="SaaStr Week Founder Mixer photo 5" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-06.jpg" alt="SaaStr Week Founder Mixer photo 6" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-07.jpg" alt="SaaStr Week Founder Mixer photo 7" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-08.jpg" alt="SaaStr Week Founder Mixer photo 8" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-09.jpg" alt="SaaStr Week Founder Mixer photo 9" loading="lazy" decoding="async">
             </div>
         </div>
 
         <div class="post">
             <div class="post-photo">
-                <img src="images/events/google-io-week-panel/google-io-week-panel-01.jpg" alt="AI Native Developers Meetup at Google I/O Week" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-01.jpg" alt="AI Native Developers Meetup at Google I/O Week" loading="lazy" decoding="async">
             </div>
             <p class="post-title">AI Native Developers Meetup @ Google I/O Week <a class="post-link" href="https://luma.com/ai-native-developers-io-week" target="_blank" rel="noopener">↗ luma.com/ai-native-developers-io-week</a></p>
             <p class="post-meta">May 2026 · Plug and Play Tech Center, Sunnyvale, CA · Seamate × Linkloud</p>
-            <p class="post-body">The largest event of the series — a panel night for founders, developers, and builders working on AI-native products, agents, and multimodal tools, timed to Google I/O week. 918 people registered and roughly 500 attended, with speakers from Google, StepFun, Genspark, Comfy, and a range of AI-native startups covering agents, AI-assisted development, multimodal creation, AI video, monetization, and production infrastructure. The audience skewed toward developers already in town for I/O, alongside AI-native founders, app and agent builders, AIGC creators, and investors watching the space. Part of Seamate's &ldquo;Front Row Series,&rdquo; the event was designed as a high-signal gathering during a week when the entire ecosystem is in one place.</p>
+            <p class="post-body">Our biggest event yet. We ran a panel night for AI-native developers during Google I/O week with Linkloud, with speakers from Google, StepFun, Genspark, and Comfy on agents, AI-assisted development, multimodal creation, and what it takes to run any of it in production. 918 people registered and about 500 showed up — mostly developers already in town for I/O, plus founders, agent builders, and investors. Part of Seamate's Front Row Series: catch the whole ecosystem while it's in one place.</p>
             <div class="tags">
                 <span class="tag">918 registered · ~500 attended</span>
                 <span class="tag">Panel</span>
                 <span class="tag">Front Row Series</span>
             </div>
             <div class="gallery">
-                <img src="images/events/google-io-week-panel/google-io-week-panel-02.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 2" loading="lazy" decoding="async">
-                <img src="images/events/google-io-week-panel/google-io-week-panel-03.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-02.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 2" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-03.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-04.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 4" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-05.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 5" loading="lazy" decoding="async">
             </div>
         </div>
 
         <div class="post">
             <div class="post-photo">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-01.jpg" alt="Sake Night with Kylon" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-01.jpg" alt="OpenClaw Guided Workshops" loading="lazy" decoding="async">
+            </div>
+            <p class="post-title">OpenClaw Guided Workshops: Build Your First AI Workflow Live</p>
+            <p class="post-meta">Feb – Mar 2026 · San Francisco, Mountain View, Palo Alto &amp; Berkeley, CA · Kylon × <a class="post-link" href="https://www.coral.inc/" target="_blank" rel="noopener">Coral</a></p>
+            <p class="post-body">We ran this workshop series with <strong>Coral</strong>, an early-stage startup that lets anyone deploy OpenClaw as a secure, always-on AI agent in minutes. We took it to five venues — San Francisco, Mountain View, Palo Alto, Stanford, and Berkeley Haas — and the room changed every time: small business owners and solo operators in SF, students and first-time founders at Stanford GSB and Haas, engineers and PMs in Mountain View. Roughly 1,300 people came across seven sessions.</p>
+            <div class="tags">
+                <span class="tag">7 sessions</span>
+                <span class="tag">~1,300 attendees</span>
+                <span class="tag">5 venues</span>
+                <span class="tag">Hands-on workshop</span>
+            </div>
+            <ul class="sessions">
+                <li>
+                    <span class="venue"><a href="https://luma.com/1z29aeji" target="_blank" rel="noopener">#1 — Pebblebed, San Francisco ↗</a></span>
+                    <span class="count">137 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/openclaw-guided-workshop" target="_blank" rel="noopener">#2 — Frontier Tower, San Francisco ↗</a></span>
+                    <span class="count">292 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/gumv6qe4" target="_blank" rel="noopener">#3 — Stanford GSB, Palo Alto ↗</a></span>
+                    <span class="count">130 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/sf-openclaw-guided-workshop-build-your-f" target="_blank" rel="noopener">#4 — Frontier Tower @ Spaceship, San Francisco ↗</a></span>
+                    <span class="count">196 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/ozwhdrwc" target="_blank" rel="noopener">#5 — Mountain View ↗</a></span>
+                    <span class="count">110 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/s43lw5af" target="_blank" rel="noopener">#6 — Berkeley Haas, with HEA × Berkeley China Summit ↗</a></span>
+                    <span class="count">138 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/sf-openclaw-guided-workshop-build-your-f-27f3" target="_blank" rel="noopener">#7 — Coral × Nexad × Gen: OpenClaw for Ads &amp; Marketing Night, San Francisco ↗</a></span>
+                    <span class="count">315 attended</span>
+                </li>
+            </ul>
+            <div class="gallery">
+                <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-02.jpg" alt="OpenClaw Guided Workshops photo 2" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-03.jpg" alt="OpenClaw Guided Workshops photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-04.jpg" alt="OpenClaw Guided Workshops photo 4" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-05.jpg" alt="OpenClaw Guided Workshops photo 5" loading="lazy" decoding="async">
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-photo">
+                <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-01.jpg" alt="Sake Night with Kylon" loading="lazy" decoding="async">
             </div>
             <p class="post-title">Sake Night with Kylon <a class="post-link" href="https://luma.com/74s6v040?tk=oDZX4U" target="_blank" rel="noopener">↗ luma.com/74s6v040</a></p>
             <p class="post-meta">May 2026 · Private residence, San Francisco, CA · Kylon</p>
-            <p class="post-body">A two-night pre-launch celebration for Kylon, an AI platform that brings agents directly into workplace messaging. Each night walked guests through a tasting of four to five premium sakes across different styles, punctuated by surprise interactive moments and time with the Kylon team. Deliberately intimate — around 28 guests per night in a private San Francisco apartment, capped so that everyone in the room could actually meet everyone else. The invite list was curated rather than open: founders, operators, and early users who would care about what Kylon was building. Less a launch party than a way to put the product in front of a small, high-context room before it went public.</p>
+            <p class="post-body">We threw a two-night sake tasting for Kylon's pre-launch. Four to five premium sakes each night, a few surprises in between, and time with the team building the product. We capped it at about 28 guests a night in a private SF apartment so everyone could actually meet everyone — invite-only, mostly founders, operators, and early users we thought would care about what Kylon was making.</p>
             <div class="tags">
                 <span class="tag">~28 guests per night</span>
                 <span class="tag">Two nights</span>
                 <span class="tag">Invite-only</span>
             </div>
             <div class="gallery">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-02.jpg" alt="Sake Night with Kylon photo 2" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-03.jpg" alt="Sake Night with Kylon photo 3" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-04.jpg" alt="Sake Night with Kylon photo 4" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-05.jpg" alt="Sake Night with Kylon photo 5" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-06.jpg" alt="Sake Night with Kylon photo 6" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-07.jpg" alt="Sake Night with Kylon photo 7" loading="lazy" decoding="async">
-                <img src="images/events/kylon-sake-night/kylon-sake-night-08.jpg" alt="Sake Night with Kylon photo 8" loading="lazy" decoding="async">
-            </div>
-        </div>
-
-        <div class="post">
-            <div class="post-photo">
-                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-01.jpg" alt="Tea Tasting Founder Meetup" loading="lazy" decoding="async">
-            </div>
-            <p class="post-title">Tea Tasting Founder Meetup</p>
-            <p class="post-meta">San Francisco, CA · Private</p>
-            <p class="post-body">The quietest event of the series, and the one that needed the least explanation. A small group of founders around a single table, working through a slow sequence of teas — no name tags, no pitch round, no open mic. The format borrowed its pacing from the tea itself: steep, taste, talk, repeat. Conversations ran long and went somewhere real, mostly toward the parts of building a company that don't make it into a demo day slide. Invitation only and intentionally tiny, kept to the size where a single conversation can hold the whole room. No landing page, no ticket link — just a room, a kettle, and people who needed a few hours off the record.</p>
-            <div class="tags">
-                <span class="tag">Private</span>
-                <span class="tag">Invite-only</span>
-                <span class="tag">Founder meetup</span>
-            </div>
-            <div class="gallery">
-                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-02.jpg" alt="Tea Tasting Founder Meetup photo 2" loading="lazy" decoding="async">
-                <img src="images/events/tea-tasting-founder-meetup/tea-tasting-founder-meetup-03.jpg" alt="Tea Tasting Founder Meetup photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-02.jpg" alt="Sake Night with Kylon photo 2" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-03.jpg" alt="Sake Night with Kylon photo 3" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-04.jpg" alt="Sake Night with Kylon photo 4" loading="lazy" decoding="async">
+                <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-05.jpg" alt="Sake Night with Kylon photo 5" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <img id="lb-img" src="" alt="">
+        <button class="lb-btn lb-close" id="lb-close" aria-label="Close">✕</button>
+        <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous photo">‹</button>
+        <button class="lb-btn lb-next" id="lb-next" aria-label="Next photo">›</button>
+        <span class="lb-count" id="lb-count"></span>
+    </div>
+
+    <script>
+    (function () {
+        var box = document.getElementById('lightbox');
+        var img = document.getElementById('lb-img');
+        var count = document.getElementById('lb-count');
+        var prevBtn = document.getElementById('lb-prev');
+        var nextBtn = document.getElementById('lb-next');
+        var group = [];
+        var index = 0;
+        var lastFocus = null;
+        var savedScroll = 0;
+
+        // Photos of one event (hero + gallery) navigate together as a single group.
+        function groupFor(el) {
+            var post = el.closest('.post');
+            return post ? Array.prototype.slice.call(post.querySelectorAll('.zoomable')) : [el];
+        }
+
+        function show(i) {
+            index = (i + group.length) % group.length;
+            var src = group[index];
+            img.src = src.currentSrc || src.src;
+            img.alt = src.alt || '';
+            var many = group.length > 1;
+            count.textContent = many ? (index + 1) + ' / ' + group.length : '';
+            prevBtn.hidden = nextBtn.hidden = !many;
+        }
+
+        function open(el) {
+            lastFocus = document.activeElement;
+            savedScroll = window.scrollY;
+            group = groupFor(el);
+            show(group.indexOf(el));
+            box.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('lb-close').focus({ preventScroll: true });
+        }
+
+        // Locking body scroll can drop the scroll position, so put it back on close.
+        function close() {
+            box.classList.remove('open');
+            document.body.style.overflow = '';
+            img.src = '';
+            if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+            window.scrollTo(0, savedScroll);
+        }
+
+        document.addEventListener('click', function (e) {
+            var el = e.target.closest('.zoomable');
+            if (el) { e.preventDefault(); open(el); }
+        });
+
+        // Clicking anywhere except the arrows closes.
+        box.addEventListener('click', function (e) {
+            if (e.target === box || e.target === img) close();
+        });
+        document.getElementById('lb-close').addEventListener('click', close);
+        prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1); });
+        nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index + 1); });
+
+        document.addEventListener('keydown', function (e) {
+            if (!box.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowLeft') show(index - 1);
+            else if (e.key === 'ArrowRight') show(index + 1);
+        });
+    })();
+    </script>
 </body>
 </html>
