@@ -10,31 +10,25 @@
             background-color: #000;
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
-            padding: 64px 32px;
+            padding: 48px 24px 120px;
             line-height: 1.5;
         }
-        .layout {
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        /* --- Compact header: photo, name, socials --- */
+        .intro {
             display: flex;
-            align-items: flex-start;
-            gap: 72px;
-            max-width: 1060px;
-            width: 100%;
+            align-items: center;
+            gap: 18px;
         }
-
-        /* --- Left rail: photo + socials --- */
-        .rail {
-            flex-shrink: 0;
-            width: 300px;
-        }
+        .photo { flex-shrink: 0; }
         .photo {
-            width: 300px;
-            height: 380px;
-            border-radius: 14px;
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
             overflow: hidden;
             background: #111;
         }
@@ -42,29 +36,38 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 50% 22%;
-            transform: scale(1.3);
+            object-position: 50% 50%;
+            transform: scale(1.6);
+        }
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.6px;
+            line-height: 1.1;
+            margin: 0 0 8px;
+        }
+        .links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .socials {
             display: flex;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 22px;
+            gap: 8px;
         }
         .socials a {
             display: block;
-            width: 42px;
-            height: 42px;
-            border-radius: 11px;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            opacity: 0.85;
-            transition: opacity 0.2s, transform 0.2s, border-color 0.2s;
+            opacity: 0.8;
+            transition: opacity 0.2s, transform 0.2s;
         }
         .socials a:hover {
             opacity: 1;
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
         .socials img {
             width: 100%;
@@ -72,144 +75,823 @@
             object-fit: cover;
             display: block;
         }
-
-        /* --- Right column: name, blurb, nav --- */
-        .info { flex: 1; min-width: 0; }
-        h1 {
-            font-size: 2.9rem;
-            font-weight: 700;
-            margin: -10px 0 26px;
-            letter-spacing: -1.5px;
-            line-height: 1.05;
-        }
-        .blurb p {
-            font-size: 15.5px;
-            color: #b9b9b9;
-            margin: 0 0 14px;
-        }
-        .blurb p:last-child { margin-bottom: 0; }
-        .blurb .cta {
-            color: #e6e6e6;
-            border-left: 2px solid #333;
-            padding-left: 14px;
-            margin-top: 20px;
-        }
-        .blurb .cta a {
-            color: #fff;
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid #fff;
+            border-radius: 999px;
+            padding: 3px 11px;
+            margin-left: 6px;
+            color: #000;
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 1px solid #555;
-            transition: border-color 0.2s;
+            font-size: 12px;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
         }
-        .blurb .cta a:hover { border-color: #fff; }
-
-        .nav {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 34px;
+        .resume-btn:hover {
+            background: #ccc;
+            border-color: #ccc;
+            color: #000;
         }
-        .nav a {
+        h2 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin: 22px 0 0;
+            font-weight: 600;
+        }
+        /* Only the first section needs to clear the header. */
+        h2:first-of-type { margin-top: 30px; }
+        .entry {
+            padding: 11px 0;
+            border-bottom: 1px solid #161616;
+        }
+        .entry-head {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 18px 20px;
-            border: 1px solid #262626;
-            border-radius: 14px;
-            text-decoration: none;
-            color: #fff;
-            background: #0b0b0b;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            gap: 14px;
         }
-        .nav a:hover {
-            background: #141414;
-            border-color: #4a4a4a;
-            transform: translateY(-2px);
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #111;
         }
-        .nav .label {
-            font-size: 17px;
+        .entry-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .role {
+            font-size: 14.5px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            margin: 0 0 1px;
+        }
+        .company {
+            font-size: 13.5px;
+            color: #ddd;
+            margin: 0 0 1px;
+        }
+        .company a {
+            color: #ddd;
+            text-decoration: none;
+            border-bottom: 1px solid #444;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .company a:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .logo-row img {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            object-fit: cover;
+            background: #111;
+        }
+        .logo-row a {
+            display: block;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .logo-row a:hover { opacity: 0.8; transform: translateY(-2px); }
+        .logo-row img { display: block; }
+        .meta {
+            font-size: 12px;
+            color: #777;
             margin: 0;
         }
-        .nav .sub {
-            font-size: 12.5px;
-            color: #7d7d7d;
-            margin: 3px 0 0;
-        }
-        .nav .arrow {
-            font-size: 18px;
-            color: #666;
-            flex-shrink: 0;
-            transition: color 0.2s, transform 0.2s;
-        }
-        .nav a:hover .arrow { color: #fff; transform: translateX(3px); }
 
-        @media (max-width: 860px) {
-            body { padding: 48px 24px; align-items: flex-start; }
-            .layout {
-                flex-direction: column;
-                align-items: center;
-                gap: 34px;
-            }
-            .rail { width: 100%; max-width: 300px; }
-            .photo { width: 100%; }
-            h1 { font-size: 2.6rem; margin-top: 0; text-align: center; }
-            .nav { grid-template-columns: 1fr; }
+        /* --- Collapsible experience entries --- */
+        details.entry > summary {
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+        }
+        details.entry > summary::-webkit-details-marker { display: none; }
+        details.entry > summary .role {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.2s;
+        }
+        .chev {
+            display: inline-block;
+            font-size: 10px;
+            color: #666;
+            transition: transform 0.2s, color 0.2s;
+        }
+        details.entry > summary:hover .chev,
+        details.entry[open] > summary .chev { color: #fff; }
+        details.entry[open] > summary .chev { transform: rotate(180deg); }
+        details.entry > summary:focus-visible .role { color: #fff; }
+        .bullets {
+            margin: 10px 0 2px;
+            padding: 10px 0 0 50px;
+            border-top: 1px solid #161616;
+            list-style: none;
+        }
+        .bullets li {
+            position: relative;
+            font-size: 13.5px;
+            color: #bbb;
+            margin-bottom: 6px;
+            padding-left: 16px;
+        }
+        .bullets li:last-child { margin-bottom: 0; }
+        .bullets li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #555;
+        }
+
+        /* --- Education --- */
+        .edu-logos {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .edu-logos img {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            object-fit: contain;
+            background: #fff;
+            padding: 3px;
+        }
+        .edu-logos img.dark { background: #000; border: 1px solid #222; padding: 0; }
+        .degree-note {
+            font-size: 12.5px;
+            font-weight: 400;
+            color: #888;
+        }
+        .programs {
+            font-size: 13.5px;
+            color: #ddd;
+            margin: 1px 0 0;
+        }
+        .programs strong { font-weight: 600; color: #fff; }
+        .programs .sep { color: #555; margin: 0 4px; }
+        .honors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .honors .tag { font-size: 11px; padding: 1px 8px; }
+
+        .post {
+            padding: 32px 0;
+            border-bottom: 1px solid #161616;
+        }
+        /* Main photo on the left, up to three stacked on the right. */
+        .media {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 6px;
+            aspect-ratio: 2 / 1;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+        .media-main, .media-side { min-height: 0; }
+        .media-side {
+            display: grid;
+            grid-auto-rows: minmax(0, 1fr);
+            gap: 6px;
+        }
+        .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #111;
+            transition: opacity 0.2s;
+        }
+        .media img:hover { opacity: 0.8; }
+        /* Extra photos stay out of the box but still open in the viewer. */
+        .media img[hidden] { display: none; }
+        .more { position: relative; min-height: 0; }
+        .more img { position: absolute; inset: 0; }
+        .more span {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.55);
+            font-size: 18px;
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+        .post-link {
+            font-size: 13px;
+            font-weight: 400;
+            color: #888;
+            text-decoration: none;
+            white-space: nowrap;
+            margin-left: 4px;
+            border-bottom: 1px solid #333;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .post-link:hover { color: #fff; border-color: #fff; }
+        .post-meta {
+            font-size: 13px;
+            color: #777;
+            margin: 0 0 12px;
+        }
+        .post-body {
+            font-size: 15px;
+            color: #bbb;
+            margin: 0;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .tag {
+            font-size: 12px;
+            color: #999;
+            border: 1px solid #2a2a2a;
+            border-radius: 999px;
+            padding: 4px 11px;
+        }
+        .sessions {
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
+        .sessions li {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .sessions .venue { color: #ccc; min-width: 0; }
+        .sessions .count { color: #777; white-space: nowrap; }
+        .sessions a {
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .sessions a:hover { color: #fff; border-color: #fff; }
+        /* Speaker and guest lists: small, tight, no dividers. */
+        .people {
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
+        .people li {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .people .who { color: #ccc; min-width: 0; }
+        .people .who span { color: #888; }
+        .people .org { color: #777; white-space: nowrap; }
+        .zoomable { cursor: zoom-in; }
+        .right {
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .location {
+            font-size: 12px;
+            color: #999;
+            margin: 0 0 1px;
+        }
+        .dates {
+            font-size: 12px;
+            color: #777;
+            white-space: nowrap;
+            margin: 0;
+        }
+
+        /* --- Lightbox --- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.94);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 64px;
+            cursor: zoom-out;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .lb-btn {
+            position: absolute;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 30px;
+            line-height: 1;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+        .lb-btn:hover { color: #fff; }
+        .lb-close { top: 10px; right: 14px; font-size: 26px; }
+        .lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+        .lb-count {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: #777;
+        }
+        @media (max-width: 560px) {
+            body { padding: 56px 20px 90px; }
+            .entry-head { gap: 14px; }
+            .location, .dates { font-size: 11.5px; }
+            .bullets { padding-left: 0; }
+            .edu-logos img { width: 32px; height: 32px; }
+            .lightbox { padding: 56px 12px 44px; }
         }
     </style>
 </head>
 <body>
-    <div class="layout">
-        <div class="rail">
+    <div class="container">
+        <header class="intro">
             <div class="photo">
                 <img src="images/profile.JPG" alt="Melody Teng">
             </div>
-            <div class="socials">
-                <a href="mailto:melodyteng0916@gmail.com" title="Email" aria-label="Email">
-                    <img src="images/socials/gmail.png" alt="Email">
-                </a>
-                <a href="https://www.linkedin.com/in/melody-teng-/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
-                    <img src="images/socials/linkedin.png" alt="LinkedIn">
-                </a>
-                <a href="https://x.com/melodyteng6" target="_blank" rel="noopener" title="X" aria-label="X">
-                    <img src="images/socials/x.png" alt="X">
-                </a>
-                <a href="https://www.instagram.com/melodyteng_/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
-                    <img src="images/socials/instagram.svg" alt="Instagram">
-                </a>
+            <div>
+                <h1>Melody Teng</h1>
+                <div class="links">
+                    <div class="socials">
+                        <a href="mailto:melodyteng0916@gmail.com" title="Email" aria-label="Email">
+                            <img src="images/socials/gmail.png" alt="Email">
+                        </a>
+                        <a href="https://www.linkedin.com/in/melody-teng-/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+                            <img src="images/socials/linkedin.png" alt="LinkedIn">
+                        </a>
+                        <a href="https://x.com/melodyteng6" target="_blank" rel="noopener" title="X" aria-label="X">
+                            <img src="images/socials/x.png" alt="X">
+                        </a>
+                        <a href="https://www.instagram.com/melodyteng_/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+                            <img src="images/socials/instagram.svg" alt="Instagram">
+                        </a>
+                    </div>
+                    <a class="resume-btn" href="work/Resume_Melody.pdf" download>↓ Resume</a>
+                </div>
+            </div>
+        </header>
+
+        <h2>Education</h2>
+
+        <div class="entry">
+            <div class="entry-head">
+                <div class="edu-logos">
+                    <img src="images/education/uoft.jpg" alt="University of Toronto">
+                    <img class="dark" src="images/education/rotman-commerce.jpg" alt="Rotman Commerce">
+                </div>
+                <div class="entry-body">
+                    <p class="role">University of Toronto <span class="degree-note">· Bachelor's Degree</span></p>
+                    <p class="programs"><strong>Statistics Major</strong> <span class="sep">·</span> <strong>Rotman Commerce Specialist</strong></p>
+                    <div class="honors">
+                        <span class="tag">GPA 3.7 / 4.0</span>
+                        <span class="tag">Dean's List Scholar</span>
+                        <span class="tag">Student Council Leadership Award Scholarship</span>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="location">Toronto, Canada</p>
+                    <p class="dates">Sep 2021 – Apr 2026</p>
+                </div>
             </div>
         </div>
 
-        <div class="info">
-            <h1>Hi, I'm Melody 👋</h1>
+        <h2>Experience</h2>
 
-            <div class="blurb">
-                <p>I moved from Toronto to the Bay Area in May and have been happily overcommitted ever since.</p>
-                <p>Most of what I do comes back to data. I started out as a data analyst, where I learned to trust the numbers before the narrative, and since moving to SF I've gotten much closer to the product and GTM side, working with founders and engineers on what gets built and why.</p>
-                <p>That same pull toward people shows up outside of work. I host startup community events for founders and builders around the Bay, and my favorite part is when a room of strangers turns into people still trading ideas an hour after the event was supposed to end.</p>
-                <p>I want to keep working at the seam between data and product, where the analysis actually decides what gets built next instead of just describing what already happened.</p>
-                <p class="cta">I love meeting people and building relationships that outlast any one job or project, so feel free to <a href="https://cal.com/melodyteng/30min" target="_blank" rel="noopener">book a coffee chat with me</a> :)</p>
+        <div class="entry">
+            <div class="entry-head">
+                <img class="logo" src="work/company%20logo/stepfun.svg" alt="StepFun">
+                <div class="entry-body">
+                    <p class="role">GTM &amp; Strategy <a class="post-link" href="https://platform.stepfun.ai/" target="_blank" rel="noopener">↗ platform.stepfun.ai</a></p>
+                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a></p>
+                </div>
+                <div class="right">
+                    <p class="location">San Francisco, CA</p>
+                    <p class="dates">Aug 2026 – Present</p>
+                </div>
             </div>
+        </div>
 
-            <div class="nav">
-                <a href="work.html">
-                    <div>
-                        <p class="label">Work Experience</p>
-                        <p class="sub">Roles, education &amp; events I've hosted</p>
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/kylon.jpg" alt="Kylon">
+                    <div class="entry-body">
+                        <p class="role">Product Manager Intern <span class="chev">▼</span></p>
+                        <p class="company"><a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
                     </div>
-                    <span class="arrow">→</span>
-                </a>
-                <a href="scuba.html">
-                    <div>
-                        <p class="label">Scuba Diving</p>
-                        <p class="sub">Dive logs &amp; photos from underwater</p>
+                    <div class="right">
+                        <p class="location">San Francisco, CA</p>
+                        <p class="dates">Apr – Jul 2026</p>
                     </div>
-                    <span class="arrow">→</span>
-                </a>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Owned the integrations onboarding flow, lifting first-integration completion 30% through funnel drop-off analysis and redesign.</li>
+                <li>Conducted 25+ discovery interviews with early design partners, translating pain points into a prioritized product backlog.</li>
+                <li>Scored 1,000+ candidate connectors on user demand and build effort to define the GitHub, Notion, and Gmail launch tier.</li>
+                <li>Wrote 8+ PRDs in Notion for core features including scoped permissions and agent workflows, driving each through eng review.</li>
+                <li>Represented Kylon to founders and presented roadmap and metrics to internal stakeholders, driving alignment on priorities.</li>
+            </ul>
+        </details>
+
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/rbc.jpg" alt="RBC">
+                    <div class="entry-body">
+                        <p class="role">Data Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">RBC Royal Bank of Canada</p>
+                        <p class="meta">Corporate Client Group (CCG), Capital Markets</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Toronto, Canada</p>
+                        <p class="dates">Jan – Aug 2025</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Queried and transformed large datasets from Snowflake using SQL to support monthly data quality reporting.</li>
+                <li>Automated and rebuilt the Financial Report using Python and Excel VBA, enhancing efficiency by 87.5% (4 hrs to 30 mins).</li>
+                <li>Developed executive-ready interactive Tableau dashboards to visualize inconsistencies in Financial M&amp;A and Loan deal records.</li>
+                <li>Designed the Daily Deposit Balance Report to monitor $37B+ in corporate deposits, incorporating inflow/outflow trend analysis, multi-year benchmarks, and run-off forecasts. Introduced a macro-driven workflow that eliminated all manual reporting steps.</li>
+                <li>Partnered with Finance and Credit teams to consolidate loan, deposit, and income data, presenting an insights story for executives.</li>
+            </ul>
+        </details>
+
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/xiaohongshu.png" alt="Xiaohongshu">
+                    <div class="entry-body">
+                        <p class="role">Data Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">Xiaohongshu (RedNote)</p>
+                        <p class="meta">High Risk Industry Sales Team</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Shanghai, China</p>
+                        <p class="dates">Jul – Sep 2024</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Analyzed 200K+ rows of sales and advertising data with advanced SQL and automated VBA workflows, identifying high-ROI advertising trends, optimizing digital advertising strategies, and boosting ROI by 15%.</li>
+                <li>Built Power BI dashboards to visualize real-time regional performance and guide sales strategies across APAC.</li>
+                <li>Designed predictive models for seasonal demand trends using Python and regression analysis.</li>
+                <li>Drove compliance alignment for medical and finance verticals by developing data-based risk monitoring frameworks.</li>
+            </ul>
+        </details>
+
+        <details class="entry">
+            <summary>
+                <div class="entry-head">
+                    <img class="logo" src="work/company%20logo/microsoft.svg.webp" alt="Microsoft">
+                    <div class="entry-body">
+                        <p class="role">Business Analyst Intern <span class="chev">▼</span></p>
+                        <p class="company">Microsoft</p>
+                        <p class="meta">Web Experiences Team (WebXT)</p>
+                    </div>
+                    <div class="right">
+                        <p class="location">Beijing, China</p>
+                        <p class="dates">May – Sep 2023</p>
+                    </div>
+                </div>
+            </summary>
+            <ul class="bullets">
+                <li>Collaborated with the Product Team on major products such as Microsoft Edge, supporting AI integration and feature optimization.</li>
+                <li>Supported Microsoft's AI product integration initiatives by evaluating 5 AI startups and industry trends, producing data-driven strategic reports influencing Microsoft's technology adoption roadmap.</li>
+                <li>Delivered daily AI newsletters, keeping executives informed on cutting-edge developments and market dynamics.</li>
+                <li>Partnered across product, engineering, and marketing teams to coordinate data-governed communication pipelines.</li>
+            </ul>
+        </details>
+
+        <h2>Events</h2>
+
+        <div class="entry">
+            <div class="entry-head">
+                <div class="entry-body">
+                    <p class="role">Events I have hosted :)</p>
+                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a> · <a href="https://luma.com/seamate" target="_blank" rel="noopener">Seamate</a> · <a href="https://mitohealth.com/" target="_blank" rel="noopener">Mito Health</a> · <a href="https://www.coral.inc/" target="_blank" rel="noopener">Coral</a> · <a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
+                    <div class="logo-row">
+                        <a href="https://platform.stepfun.ai/" target="_blank" rel="noopener" title="StepFun"><img src="work/company%20logo/stepfun.svg" alt="StepFun"></a>
+                        <a href="https://luma.com/seamate" target="_blank" rel="noopener" title="Seamate"><img src="work/company%20logo/seamate.jpg" alt="Seamate"></a>
+                        <a href="https://mitohealth.com/" target="_blank" rel="noopener" title="Mito Health"><img src="work/company%20logo/mitohealth.jpg" alt="Mito Health"></a>
+                        <a href="https://www.coral.inc/" target="_blank" rel="noopener" title="Coral"><img src="work/company%20logo/coral.jpg" alt="Coral"></a>
+                        <a href="https://kylon.io" target="_blank" rel="noopener" title="Kylon"><img src="work/company%20logo/kylon.jpg" alt="Kylon"></a>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="location">San Francisco, CA</p>
+                    <p class="dates">Feb 2026 – Present</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/stepaudio3-launch/stepaudio3-launch-01.jpg" alt="Voice AI Meetup: StepAudio 3 Launch" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/stepaudio3-launch/stepaudio3-launch-02.jpg" alt="StepAudio 3 Launch photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/stepaudio3-launch/stepaudio3-launch-03.jpg" alt="StepAudio 3 Launch photo 3" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/stepaudio3-launch/stepaudio3-launch-04.jpg" alt="StepAudio 3 Launch photo 4" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">Voice AI Meetup: StepAudio 3 Launch ft. PLAUD, Cresta, Coval &amp; SGLang <a class="post-link" href="https://luma.com/bkpe5h92" target="_blank" rel="noopener">↗ luma.com/bkpe5h92</a></p>
+            <p class="post-meta">Sep 16, 2026 · SoMa, San Francisco, CA · StepFun</p>
+            <p class="post-body">We launched <strong>StepAudio 3</strong>, StepFun's next-generation audio model family built to understand voice, sound, context, and the rhythm of conversation, with live demos and an AMA, then a cross-stack panel on taking real-time voice AI to production. StepFun is a foundation model company whose Step models span language, audio, multimodal, and reasoning.</p>
+            <div class="tags">
+                <span class="tag">244 registered</span>
+                <span class="tag">Model launch</span>
+                <span class="tag">Live demo &amp; AMA</span>
+                <span class="tag">Panel</span>
+            </div>
+            <ul class="people">
+                <li><span class="who">Xuerui Yang <span>· Head of StepAudio (keynote)</span></span><span class="org">StepFun</span></li>
+                <li><span class="who">Yijia Zhang <span>· Partner &amp; Head of AI Algorithm &amp; Platform</span></span><span class="org">PLAUD.AI</span></li>
+                <li><span class="who">Jove Zhong <span>· Head of Forward Deployed Engineering</span></span><span class="org">Cresta</span></li>
+                <li><span class="who">Kobi Hudson <span>· Head of Engineering</span></span><span class="org">Coval</span></li>
+                <li><span class="who">Jingwen Gu <span>· Maintainer</span></span><span class="org">SGLang-Omni</span></li>
+            </ul>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/audio-founders-dinner/audio-founders-dinner-01.jpg" alt="Voice AI Founders' Dinner" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/audio-founders-dinner/audio-founders-dinner-02.jpg" alt="Voice AI Founders' Dinner photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/audio-founders-dinner/audio-founders-dinner-03.jpg" alt="Voice AI Founders' Dinner photo 3" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/audio-founders-dinner/audio-founders-dinner-04.jpg" alt="Voice AI Founders' Dinner photo 4" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">Voice AI Founders' Dinner</p>
+            <p class="post-meta">Sep 17, 2026 · Private dinner · StepFun</p>
+            <p class="post-body">A private, invite-only dinner the night after the launch for founders and engineering leaders building in voice and multimodal AI.</p>
+            <div class="tags">
+                <span class="tag">Invite-only</span>
+                <span class="tag">Founders &amp; engineering leaders</span>
+                <span class="tag">Private dinner</span>
+            </div>
+            <ul class="people">
+                <li><span class="who">George Cameron <span>· Co-founder</span></span><span class="org">Artificial Analysis</span></li>
+                <li><span class="who">Gavin <span>· Platform Model Partnership</span></span><span class="org">fal</span></li>
+                <li><span class="who">Debajyoti (Debo) Datta <span>· Co-founder</span></span><span class="org">Hippocratic AI</span></li>
+                <li><span class="who">Bin Liu <span>· VP, Agent &amp; Product Engineering</span></span><span class="org">HeyGen</span></li>
+                <li><span class="who">Xiuzhen (Flora) Zhang <span>· Head of Quality Assurance</span></span><span class="org">Trip.com</span></li>
+                <li><span class="who">Yijia Zhang <span>· Partner</span></span><span class="org">PLAUD.AI</span></li>
+                <li><span class="who">Jove Zhong <span>· Head of FDE</span></span><span class="org">Cresta</span></li>
+                <li><span class="who">Tony Wang <span>· Co-founder</span></span><span class="org">Agora</span></li>
+                <li><span class="who">Kwindla Hultman Kramer <span>· Founder</span></span><span class="org">Pipecat</span></li>
+            </ul>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-01.jpg" alt="SaaStr Week Founder Mixer" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-02.jpg" alt="SaaStr Week Founder Mixer photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-03.jpg" alt="SaaStr Week Founder Mixer photo 3" loading="lazy" decoding="async">
+                    <div class="more"><img class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-04.jpg" alt="SaaStr Week Founder Mixer photo 4" loading="lazy" decoding="async"><span>+6</span></div>
+                    <img hidden class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-05.jpg" alt="SaaStr Week Founder Mixer photo 5" loading="lazy" decoding="async">
+                    <img hidden class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-06.jpg" alt="SaaStr Week Founder Mixer photo 6" loading="lazy" decoding="async">
+                    <img hidden class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-07.jpg" alt="SaaStr Week Founder Mixer photo 7" loading="lazy" decoding="async">
+                    <img hidden class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-08.jpg" alt="SaaStr Week Founder Mixer photo 8" loading="lazy" decoding="async">
+                    <img hidden class="zoomable" src="images/events/saastr-week-founder-mixer/saastr-week-founder-mixer-09.jpg" alt="SaaStr Week Founder Mixer photo 9" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">SaaStr Week Founder Mixer 🍕🍺Step Out. StepFun In. <a class="post-link" href="https://luma.com/4cqlswgf?tk=7cM7TP" target="_blank" rel="noopener">↗ luma.com/4cqlswgf</a></p>
+            <p class="post-meta">May 2026 · Downtown San Mateo, CA · Seamate × StepFun</p>
+            <p class="post-body">We hosted this founder mixer during SaaStr Week with StepFun — pizza, drinks, and none of the slide decks. StepFun opened with a short intro, then we ran a 25-minute open mic where anyone could stand up and say what they were building and who they wanted to meet. 249 people registered: AI-native founders, SaaS builders adding AI to their stack, and investors watching the application layer. Big enough for good introductions, small enough that nobody got lost.</p>
+            <div class="tags">
+                <span class="tag">249 registered</span>
+                <span class="tag">Founder mixer</span>
+                <span class="tag">Open mic</span>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-01.jpg" alt="AI Native Developers Meetup at Google I/O Week" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-02.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-03.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 3" loading="lazy" decoding="async">
+                    <div class="more"><img class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-04.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 4" loading="lazy" decoding="async"><span>+2</span></div>
+                    <img hidden class="zoomable" src="images/events/google-io-week-panel/google-io-week-panel-05.jpg" alt="AI Native Developers Meetup at Google I/O Week photo 5" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">AI Native Developers Meetup @ Google I/O Week <a class="post-link" href="https://luma.com/ai-native-developers-io-week" target="_blank" rel="noopener">↗ luma.com/ai-native-developers-io-week</a></p>
+            <p class="post-meta">May 2026 · Plug and Play Tech Center, Sunnyvale, CA · Seamate × Linkloud</p>
+            <p class="post-body">Our biggest event yet. We ran a panel night for AI-native developers during Google I/O week with Linkloud, with speakers from Google, StepFun, Genspark, and Comfy on agents, AI-assisted development, multimodal creation, and what it takes to run any of it in production. 918 people registered and about 500 showed up — mostly developers already in town for I/O, plus founders, agent builders, and investors. Part of Seamate's Front Row Series: catch the whole ecosystem while it's in one place.</p>
+            <div class="tags">
+                <span class="tag">918 registered · ~500 attended</span>
+                <span class="tag">Panel</span>
+                <span class="tag">Front Row Series</span>
+            </div>
+            <ul class="people">
+                <li><span class="who">Adam Mawdesley <span>· Chief Revenue Officer</span></span><span class="org">Subotiz</span></li>
+                <li><span class="who">Ailing Teng <span>· General Manager of Developer Products &amp; Ecosystem</span></span><span class="org">StepFun</span></li>
+                <li><span class="who">Artur Kiulian <span>· CEO</span></span><span class="org">Principle</span></li>
+                <li><span class="who">Bill Zhu <span>· Founder &amp; CEO</span></span><span class="org">Pokee AI</span></li>
+                <li><span class="who">Ran Li <span>· Co-creator of Google's Agent Engine</span></span><span class="org">Google</span></li>
+                <li><span class="who">Robert Scoble <span>· Founder &amp; CEO</span></span><span class="org">Unaligned</span></li>
+                <li><span class="who">Yannik Marek <span>· Co-founder</span></span><span class="org">Comfy</span></li>
+                <li><span class="who">Queena Qiu <span>· Founder &amp; CEO</span></span><span class="org">Polyverse</span></li>
+                <li><span class="who">Roberto Pernicone <span>· CEO</span></span><span class="org">Antal Capital</span></li>
+                <li><span class="who">Jian Zhou <span>· Director of Engineering</span></span><span class="org">Google Play</span></li>
+                <li><span class="who">Jiabo Feng <span>· Founder</span></span><span class="org">Blink.new</span></li>
+                <li><span class="who">Lenjoy Lin <span>· Co-founder</span></span><span class="org">Genspark</span></li>
+                <li><span class="who">Chaoyu Yang <span>· Director of GTM</span></span><span class="org">Modular</span></li>
+            </ul>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-01.jpg" alt="OpenClaw Guided Workshops" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-02.jpg" alt="OpenClaw Guided Workshops photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-03.jpg" alt="OpenClaw Guided Workshops photo 3" loading="lazy" decoding="async">
+                    <div class="more"><img class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-04.jpg" alt="OpenClaw Guided Workshops photo 4" loading="lazy" decoding="async"><span>+2</span></div>
+                    <img hidden class="zoomable" src="images/events/openclaw-workshops/openclaw-workshops-05.jpg" alt="OpenClaw Guided Workshops photo 5" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">OpenClaw Guided Workshops: Build Your First AI Workflow Live</p>
+            <p class="post-meta">Feb – Mar 2026 · San Francisco, Mountain View, Palo Alto &amp; Berkeley, CA · Kylon × <a class="post-link" href="https://www.coral.inc/" target="_blank" rel="noopener">Coral</a></p>
+            <p class="post-body">We ran this workshop series with <strong>Coral</strong>, an early-stage startup that lets anyone deploy OpenClaw as a secure, always-on AI agent in minutes. We took it to five venues — San Francisco, Mountain View, Palo Alto, Stanford, and Berkeley Haas — and the room changed every time: small business owners and solo operators in SF, students and first-time founders at Stanford GSB and Haas, engineers and PMs in Mountain View. Roughly 1,300 people came across seven sessions.</p>
+            <div class="tags">
+                <span class="tag">7 sessions</span>
+                <span class="tag">~1,300 attendees</span>
+                <span class="tag">5 venues</span>
+                <span class="tag">Hands-on workshop</span>
+            </div>
+            <ul class="sessions">
+                <li>
+                    <span class="venue"><a href="https://luma.com/1z29aeji" target="_blank" rel="noopener">#1 — Pebblebed, San Francisco ↗</a></span>
+                    <span class="count">137 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/openclaw-guided-workshop" target="_blank" rel="noopener">#2 — Frontier Tower, San Francisco ↗</a></span>
+                    <span class="count">292 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/gumv6qe4" target="_blank" rel="noopener">#3 — Stanford GSB, Palo Alto ↗</a></span>
+                    <span class="count">130 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/sf-openclaw-guided-workshop-build-your-f" target="_blank" rel="noopener">#4 — Frontier Tower @ Spaceship, San Francisco ↗</a></span>
+                    <span class="count">196 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/ozwhdrwc" target="_blank" rel="noopener">#5 — Mountain View ↗</a></span>
+                    <span class="count">110 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/s43lw5af" target="_blank" rel="noopener">#6 — Berkeley Haas, with HEA × Berkeley China Summit ↗</a></span>
+                    <span class="count">138 attended</span>
+                </li>
+                <li>
+                    <span class="venue"><a href="https://luma.com/sf-openclaw-guided-workshop-build-your-f-27f3" target="_blank" rel="noopener">#7 — Coral × Nexad × Gen: OpenClaw for Ads &amp; Marketing Night, San Francisco ↗</a></span>
+                    <span class="count">315 attended</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="post">
+            <div class="media">
+                <div class="media-main"><img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-01.jpg" alt="Sake Night with Kylon" loading="lazy" decoding="async"></div>
+                <div class="media-side">
+                    <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-02.jpg" alt="Sake Night with Kylon photo 2" loading="lazy" decoding="async">
+                    <img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-03.jpg" alt="Sake Night with Kylon photo 3" loading="lazy" decoding="async">
+                    <div class="more"><img class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-04.jpg" alt="Sake Night with Kylon photo 4" loading="lazy" decoding="async"><span>+2</span></div>
+                    <img hidden class="zoomable" src="images/events/kylon-sake-night/kylon-sake-night-05.jpg" alt="Sake Night with Kylon photo 5" loading="lazy" decoding="async">
+                </div>
+            </div>
+            <p class="post-title">Sake Night with Kylon <a class="post-link" href="https://luma.com/74s6v040?tk=oDZX4U" target="_blank" rel="noopener">↗ luma.com/74s6v040</a></p>
+            <p class="post-meta">May 2026 · Private residence, San Francisco, CA · Kylon</p>
+            <p class="post-body">We threw a two-night sake tasting for Kylon's pre-launch. Four to five premium sakes each night, a few surprises in between, and time with the team building the product. We capped it at about 28 guests a night in a private SF apartment so everyone could actually meet everyone — invite-only, mostly founders, operators, and early users we thought would care about what Kylon was making.</p>
+            <div class="tags">
+                <span class="tag">~28 guests per night</span>
+                <span class="tag">Two nights</span>
+                <span class="tag">Invite-only</span>
             </div>
         </div>
     </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <img id="lb-img" src="" alt="">
+        <button class="lb-btn lb-close" id="lb-close" aria-label="Close">✕</button>
+        <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous photo">‹</button>
+        <button class="lb-btn lb-next" id="lb-next" aria-label="Next photo">›</button>
+        <span class="lb-count" id="lb-count"></span>
+    </div>
+
+    <script>
+    (function () {
+        var box = document.getElementById('lightbox');
+        var img = document.getElementById('lb-img');
+        var count = document.getElementById('lb-count');
+        var prevBtn = document.getElementById('lb-prev');
+        var nextBtn = document.getElementById('lb-next');
+        var group = [];
+        var index = 0;
+        var lastFocus = null;
+        var savedScroll = 0;
+
+        // Photos of one event (main + side, including hidden extras) navigate together as a single group.
+        function groupFor(el) {
+            var post = el.closest('.post');
+            return post ? Array.prototype.slice.call(post.querySelectorAll('.zoomable')) : [el];
+        }
+
+        function show(i) {
+            index = (i + group.length) % group.length;
+            var src = group[index];
+            img.src = src.currentSrc || src.src;
+            img.alt = src.alt || '';
+            var many = group.length > 1;
+            count.textContent = many ? (index + 1) + ' / ' + group.length : '';
+            prevBtn.hidden = nextBtn.hidden = !many;
+        }
+
+        function open(el) {
+            lastFocus = document.activeElement;
+            savedScroll = window.scrollY;
+            group = groupFor(el);
+            show(group.indexOf(el));
+            box.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('lb-close').focus({ preventScroll: true });
+        }
+
+        // Locking body scroll can drop the scroll position, so put it back on close.
+        function close() {
+            box.classList.remove('open');
+            document.body.style.overflow = '';
+            img.src = '';
+            if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+            window.scrollTo(0, savedScroll);
+        }
+
+        document.addEventListener('click', function (e) {
+            var el = e.target.closest('.zoomable');
+            if (el) { e.preventDefault(); open(el); }
+        });
+
+        // Clicking anywhere except the arrows closes.
+        box.addEventListener('click', function (e) {
+            if (e.target === box || e.target === img) close();
+        });
+        document.getElementById('lb-close').addEventListener('click', close);
+        prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1); });
+        nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index + 1); });
+
+        document.addEventListener('keydown', function (e) {
+            if (!box.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowLeft') show(index - 1);
+            else if (e.key === 'ArrowRight') show(index + 1);
+        });
+    })();
+    </script>
 </body>
 </html>
