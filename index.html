@@ -39,6 +39,20 @@
             object-position: 50% 50%;
             transform: scale(1.6);
         }
+        .book-btn {
+            margin-left: auto;
+            flex-shrink: 0;
+            background: #fff;
+            color: #000;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            padding: 7px 14px;
+            border-radius: 999px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .book-btn:hover { background: #ddd; transform: translateY(-1px); }
         h1 {
             font-size: 1.6rem;
             font-weight: 700;
@@ -80,13 +94,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #666;
-            margin: 22px 0 0;
+            margin: 14px 0 0;
             font-weight: 600;
         }
         /* Only the first section needs to clear the header. */
-        h2:first-of-type { margin-top: 30px; }
+        h2:first-of-type { margin-top: 20px; }
         .entry {
-            padding: 11px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #161616;
         }
         .entry-head {
@@ -122,6 +136,10 @@
             border-bottom: 1px solid #444;
             transition: color 0.2s, border-color 0.2s;
         }
+        .company-note {
+            font-size: 11.5px;
+            color: #888;
+        }
         .company a:hover {
             color: #fff;
             border-color: #fff;
@@ -139,6 +157,15 @@
             object-fit: cover;
             background: #111;
         }
+        .hosted-head {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            margin-bottom: 2px;
+        }
+        .hosted-head .role { margin: 0; }
+        .hosted-head .logo-row { margin-top: 0; }
         .logo-row a {
             display: block;
             transition: opacity 0.2s, transform 0.2s;
@@ -164,14 +191,23 @@
             gap: 7px;
             transition: color 0.2s;
         }
+        /* Round blue badge so it's clear the role expands. */
         .chev {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             font-size: 10px;
-            color: #666;
-            transition: transform 0.2s, color 0.2s;
+            line-height: 1;
+            color: #5aa9ff;
+            background: rgba(90, 169, 255, 0.16);
+            border: 1px solid rgba(90, 169, 255, 0.45);
+            transition: transform 0.2s, color 0.2s, background 0.2s;
         }
         details.entry > summary:hover .chev,
-        details.entry[open] > summary .chev { color: #fff; }
+        details.entry[open] > summary .chev { color: #fff; background: #2f7fd6; border-color: #2f7fd6; }
         details.entry[open] > summary .chev { transform: rotate(180deg); }
         details.entry > summary:focus-visible .role { color: #fff; }
         .bullets {
@@ -232,10 +268,13 @@
             gap: 6px;
             margin-top: 6px;
         }
-        .honors .tag { font-size: 11px; padding: 1px 8px; }
+        .honors { gap: 5px; }
+        .honors .tag { font-size: 10px; padding: 1px 6px; white-space: nowrap; }
 
+        /* The first event sits right under the hosted line. */
+        .hosted + .post { padding-top: 10px; }
         .post {
-            padding: 32px 0;
+            padding: 14px 0;
             border-bottom: 1px solid #161616;
         }
         /* Main photo on the left, up to three stacked on the right. */
@@ -246,7 +285,7 @@
             aspect-ratio: 2 / 1;
             border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 8px;
         }
         .media-main, .media-side { min-height: 0; }
         .media-side {
@@ -281,7 +320,7 @@
         .post-title {
             font-size: 18px;
             font-weight: 600;
-            margin: 0 0 6px;
+            margin: 0 0 2px;
         }
         .post-link {
             font-size: 13px;
@@ -297,7 +336,7 @@
         .post-meta {
             font-size: 13px;
             color: #777;
-            margin: 0 0 12px;
+            margin: 0 0 6px;
         }
         .post-body {
             font-size: 15px;
@@ -308,7 +347,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 14px;
+            margin-top: 8px;
         }
         .tag {
             font-size: 12px;
@@ -318,7 +357,7 @@
             padding: 4px 11px;
         }
         .sessions {
-            margin: 12px 0 0;
+            margin: 6px 0 0;
             padding: 0;
             list-style: none;
             font-size: 12.5px;
@@ -341,7 +380,7 @@
         .sessions a:hover { color: #fff; border-color: #fff; }
         /* Speaker and guest lists: small, tight, no dividers. */
         .people {
-            margin: 12px 0 0;
+            margin: 6px 0 0;
             padding: 0;
             list-style: none;
             font-size: 12.5px;
@@ -422,25 +461,43 @@
             /* Compact header */
             .intro { gap: 14px; }
             .photo { width: 64px; height: 64px; }
-            h1 { font-size: 1.25rem; margin-bottom: 6px; }
+            h1 { font-size: 1.25rem; margin-bottom: 6px; white-space: nowrap; }
             .socials a { width: 20px; height: 20px; }
+            .book-btn { font-size: 11px; padding: 5px 10px; }
 
             /* Small, tight education + experience */
-            h2 { font-size: 10px; letter-spacing: 1.5px; margin-top: 16px; }
-            h2:first-of-type { margin-top: 20px; }
-            .entry { padding: 7px 0; }
+            h2 { font-size: 10px; letter-spacing: 1.5px; margin-top: 10px; }
+            h2:first-of-type { margin-top: 14px; }
+            .entry { padding: 4px 0; }
             .entry-head { gap: 10px; }
             .logo { width: 28px; height: 28px; border-radius: 7px; }
             .edu-logos { gap: 4px; }
             .edu-logos img { width: 26px; height: 26px; border-radius: 6px; padding: 2px; }
             .role { font-size: 12.5px; margin: 0; }
             .company, .programs { font-size: 11.5px; margin: 0; }
+            .company-note { font-size: 9.5px; white-space: nowrap; }
             .degree-note { font-size: 11px; }
             .meta { font-size: 10.5px; }
             .location, .dates { font-size: 10.5px; margin: 0; }
             .honors { gap: 4px; margin-top: 4px; }
             .honors .tag { font-size: 9.5px; padding: 0 6px; }
-            .chev { font-size: 8px; }
+            .edu .entry-head { flex-wrap: wrap; row-gap: 3px; }
+            .edu .entry-body { flex: 1 1 0; }
+            .edu .role, .edu .programs { white-space: nowrap; }
+            .edu .programs { font-size: min(11px, 2.9vw); }
+            .edu .programs .sep { margin: 0 2px; }
+            .edu .right {
+                flex-basis: 100%;
+                display: flex;
+                gap: 6px;
+                padding-left: 66px;
+                text-align: left;
+            }
+            .edu .location::after { content: " ·"; }
+            .hosted .entry-head { flex-wrap: wrap; row-gap: 2px; }
+            .hosted .right { flex-basis: 100%; display: flex; gap: 6px; text-align: left; }
+            .hosted .location::after { content: " ·"; }
+            .chev { width: 18px; height: 18px; font-size: 9px; }
             .bullets { padding-left: 0; margin-top: 6px; padding-top: 6px; }
             .bullets li { font-size: 11.5px; margin-bottom: 4px; padding-left: 12px; }
             .bullets li::before { top: 7px; }
@@ -448,14 +505,14 @@
             .logo-row img { width: 22px; height: 22px; }
 
             /* Events: smaller text */
-            .post { padding: 18px 0; }
+            .post { padding: 10px 0; }
             .post-title { font-size: 14.5px; margin-bottom: 3px; }
             .post-link { font-size: 11px; }
-            .post-meta { font-size: 11px; margin-bottom: 8px; }
+            .post-meta { font-size: 11px; margin-bottom: 4px; }
             .post-body { font-size: 12.5px; }
-            .tags { gap: 5px; margin-top: 8px; }
+            .tags { gap: 5px; margin-top: 5px; }
             .tag { font-size: 10.5px; padding: 2px 8px; }
-            .people, .sessions { font-size: 11px; margin-top: 8px; }
+            .people, .sessions { font-size: 11px; margin-top: 5px; }
 
             /* Photos: one swipeable row with every photo, no +N */
             .media {
@@ -467,7 +524,7 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
-                margin-bottom: 10px;
+                margin-bottom: 6px;
             }
             .media::-webkit-scrollbar { display: none; }
             .media-main, .media-side, .more { display: contents; }
@@ -512,11 +569,12 @@
                     </div>
                 </div>
             </div>
+            <a class="book-btn" href="https://cal.com/melodyteng/15min" target="_blank" rel="noopener">Book a call with me</a>
         </header>
 
         <h2>Education</h2>
 
-        <div class="entry">
+        <div class="entry edu">
             <div class="entry-head">
                 <div class="edu-logos">
                     <img src="images/education/uoft.jpg" alt="University of Toronto">
@@ -545,7 +603,7 @@
                 <img class="logo" src="work/company%20logo/stepfun.svg" alt="StepFun">
                 <div class="entry-body">
                     <p class="role">GTM &amp; Strategy <a class="post-link" href="https://platform.stepfun.ai/" target="_blank" rel="noopener">↗ platform.stepfun.ai</a></p>
-                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a></p>
+                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a> <span class="company-note">(StepAudio 3 &amp; Step 5 Models)</span></p>
                 </div>
                 <div class="right">
                     <p class="location">San Francisco, CA</p>
@@ -649,18 +707,20 @@
 
         <h2>Events</h2>
 
-        <div class="entry">
+        <div class="entry hosted">
             <div class="entry-head">
                 <div class="entry-body">
-                    <p class="role">Events I have hosted :)</p>
-                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a> · <a href="https://luma.com/seamate" target="_blank" rel="noopener">Seamate</a> · <a href="https://mitohealth.com/" target="_blank" rel="noopener">Mito Health</a> · <a href="https://www.coral.inc/" target="_blank" rel="noopener">Coral</a> · <a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
-                    <div class="logo-row">
-                        <a href="https://platform.stepfun.ai/" target="_blank" rel="noopener" title="StepFun"><img src="work/company%20logo/stepfun.svg" alt="StepFun"></a>
-                        <a href="https://luma.com/seamate" target="_blank" rel="noopener" title="Seamate"><img src="work/company%20logo/seamate.jpg" alt="Seamate"></a>
-                        <a href="https://mitohealth.com/" target="_blank" rel="noopener" title="Mito Health"><img src="work/company%20logo/mitohealth.jpg" alt="Mito Health"></a>
-                        <a href="https://www.coral.inc/" target="_blank" rel="noopener" title="Coral"><img src="work/company%20logo/coral.jpg" alt="Coral"></a>
-                        <a href="https://kylon.io" target="_blank" rel="noopener" title="Kylon"><img src="work/company%20logo/kylon.jpg" alt="Kylon"></a>
+                    <div class="hosted-head">
+                        <p class="role">Events I have hosted :)</p>
+                        <div class="logo-row">
+                            <a href="https://platform.stepfun.ai/" target="_blank" rel="noopener" title="StepFun"><img src="work/company%20logo/stepfun.svg" alt="StepFun"></a>
+                            <a href="https://luma.com/seamate" target="_blank" rel="noopener" title="Seamate"><img src="work/company%20logo/seamate.jpg" alt="Seamate"></a>
+                            <a href="https://mitohealth.com/" target="_blank" rel="noopener" title="Mito Health"><img src="work/company%20logo/mitohealth.jpg" alt="Mito Health"></a>
+                            <a href="https://www.coral.inc/" target="_blank" rel="noopener" title="Coral"><img src="work/company%20logo/coral.jpg" alt="Coral"></a>
+                            <a href="https://kylon.io" target="_blank" rel="noopener" title="Kylon"><img src="work/company%20logo/kylon.jpg" alt="Kylon"></a>
+                        </div>
                     </div>
+                    <p class="company"><a href="https://platform.stepfun.ai/" target="_blank" rel="noopener">StepFun</a> · <a href="https://luma.com/seamate" target="_blank" rel="noopener">Seamate</a> · <a href="https://mitohealth.com/" target="_blank" rel="noopener">Mito Health</a> · <a href="https://www.coral.inc/" target="_blank" rel="noopener">Coral</a> · <a href="https://kylon.io" target="_blank" rel="noopener">Kylon</a></p>
                 </div>
                 <div class="right">
                     <p class="location">San Francisco, CA</p>
