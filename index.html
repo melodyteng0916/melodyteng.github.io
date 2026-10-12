@@ -75,26 +75,6 @@
             object-fit: cover;
             display: block;
         }
-        .resume-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            border: 1px solid #fff;
-            border-radius: 999px;
-            padding: 3px 11px;
-            margin-left: 6px;
-            color: #000;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 12px;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
-        .resume-btn:hover {
-            background: #ccc;
-            border-color: #ccc;
-            color: #000;
-        }
         h2 {
             font-size: 12px;
             text-transform: uppercase;
@@ -437,11 +417,72 @@
             color: #777;
         }
         @media (max-width: 560px) {
-            body { padding: 56px 20px 90px; }
-            .entry-head { gap: 14px; }
-            .location, .dates { font-size: 11.5px; }
-            .bullets { padding-left: 0; }
-            .edu-logos img { width: 32px; height: 32px; }
+            body { padding: 28px 16px 80px; }
+
+            /* Compact header */
+            .intro { gap: 14px; }
+            .photo { width: 64px; height: 64px; }
+            h1 { font-size: 1.25rem; margin-bottom: 6px; }
+            .socials a { width: 20px; height: 20px; }
+
+            /* Small, tight education + experience */
+            h2 { font-size: 10px; letter-spacing: 1.5px; margin-top: 16px; }
+            h2:first-of-type { margin-top: 20px; }
+            .entry { padding: 7px 0; }
+            .entry-head { gap: 10px; }
+            .logo { width: 28px; height: 28px; border-radius: 7px; }
+            .edu-logos { gap: 4px; }
+            .edu-logos img { width: 26px; height: 26px; border-radius: 6px; padding: 2px; }
+            .role { font-size: 12.5px; margin: 0; }
+            .company, .programs { font-size: 11.5px; margin: 0; }
+            .degree-note { font-size: 11px; }
+            .meta { font-size: 10.5px; }
+            .location, .dates { font-size: 10.5px; margin: 0; }
+            .honors { gap: 4px; margin-top: 4px; }
+            .honors .tag { font-size: 9.5px; padding: 0 6px; }
+            .chev { font-size: 8px; }
+            .bullets { padding-left: 0; margin-top: 6px; padding-top: 6px; }
+            .bullets li { font-size: 11.5px; margin-bottom: 4px; padding-left: 12px; }
+            .bullets li::before { top: 7px; }
+            .logo-row { margin-top: 5px; gap: 6px; }
+            .logo-row img { width: 22px; height: 22px; }
+
+            /* Events: smaller text */
+            .post { padding: 18px 0; }
+            .post-title { font-size: 14.5px; margin-bottom: 3px; }
+            .post-link { font-size: 11px; }
+            .post-meta { font-size: 11px; margin-bottom: 8px; }
+            .post-body { font-size: 12.5px; }
+            .tags { gap: 5px; margin-top: 8px; }
+            .tag { font-size: 10.5px; padding: 2px 8px; }
+            .people, .sessions { font-size: 11px; margin-top: 8px; }
+
+            /* Photos: one swipeable row with every photo, no +N */
+            .media {
+                display: flex;
+                gap: 6px;
+                aspect-ratio: auto;
+                border-radius: 0;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                margin-bottom: 10px;
+            }
+            .media::-webkit-scrollbar { display: none; }
+            .media-main, .media-side, .more { display: contents; }
+            .media img, .media img[hidden], .more img {
+                display: block;
+                position: static;
+                flex: 0 0 86%;
+                width: 86%;
+                height: auto;
+                aspect-ratio: 3 / 2;
+                border-radius: 10px;
+                scroll-snap-align: start;
+            }
+            .more span { display: none; }
+
             .lightbox { padding: 56px 12px 44px; }
         }
     </style>
@@ -469,7 +510,6 @@
                             <img src="images/socials/instagram.svg" alt="Instagram">
                         </a>
                     </div>
-                    <a class="resume-btn" href="work/Resume_Melody.pdf" download>↓ Resume</a>
                 </div>
             </div>
         </header>
@@ -884,6 +924,16 @@
         document.getElementById('lb-close').addEventListener('click', close);
         prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1); });
         nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(index + 1); });
+
+        // Swipe left/right in the viewer on phones.
+        var touchX = null;
+        box.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+        box.addEventListener('touchend', function (e) {
+            if (touchX === null) return;
+            var dx = e.changedTouches[0].clientX - touchX;
+            touchX = null;
+            if (Math.abs(dx) > 40 && group.length > 1) show(index + (dx < 0 ? 1 : -1));
+        });
 
         document.addEventListener('keydown', function (e) {
             if (!box.classList.contains('open')) return;

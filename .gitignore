@@ -1,3 +1,7 @@
 .DS_Store
 *.HEIC
 *.heic
+
+# Original photo drops; the site uses the converted copies in the kebab-case folders
+images/events/stepaudio3 launch/
+images/events/audio founders dinner/
